@@ -1,103 +1,93 @@
-# 📌 Desafio API
+# API RESTful de Gerenciamento de Usuários com JWT
 
-API desenvolvida em **NestJS + TypeScript**, utilizando **MySQL** como banco de dados e autenticação via **JWT**.
-
----
-
-## 🚀 Tecnologias
-- Node.js  
-- NestJS  
-- TypeScript  
-- MySQL  
-- JWT  
-- Jest (testes)  
+Este projeto é uma API RESTful robusta e segura para gerenciar usuários em uma plataforma digital, utilizando Node.js, Express e MySQL. A autenticação é feita com JSON Web Tokens (JWT), garantindo segurança no acesso e manipulação de dados sensíveis.
 
 ---
 
-## ⚙️ Configuração
+## Tecnologias Utilizadas
+
+- Node.js
+- Express.js
+- JSON Web Token (JWT)
+- MySQL com pool de conexões
+- bcryptjs para hash de senhas
+- express-validator para validação dos dados
+- helmet, cors e express-rate-limit para segurança
+- dotenv para variáveis de ambiente
+
+---
+
+## Funcionalidades Principais
+
+- Cadastro e login seguro de usuários com validação e hash de senhas
+- Proteção das rotas por autenticação JWT
+- Gestão completa de usuários (CRUD)
+- Sistema de roles (usuário comum e administrador) para controle de acesso
+- Paginação e filtros na listagem de usuários
+- Soft delete para manter integridade e auditoria
+- Rate limiting para proteção contra ataques brute force
+- Tratamento centralizado de erros e respostas padronizadas
+- Documentação integrada via endpoint `/api/docs`
+
+---
+
+## Como Usar
+
+### Instalação
 
 1. Clone o repositório:
-   ```bash
-   git clone https://github.com/seu-usuario/desafio-api.git
-   cd desafio-api
-Instale as dependências:
+git clone https://github.com/katgmrs/desafio-APIRESTcomNest.JS.git
 
-bash
-Copiar código
+2. Acesse o diretório do projeto:
+cd api-usuarios-jwt
+
+3. Instale as dependências:
 npm install
-Configure o arquivo .env:
 
-env
-Copiar código
-DB_HOST=localhost
+4. Configure o banco de dados MySQL e crie uma database chamada `usuarios_api`.
+5. Configure as variáveis de ambiente copiando `.env.example` para `.env` e ajustando conforme seu ambiente.
+6. Inicie o servidor em modo desenvolvimento:
+npm run dev
 
-JWT_SECRET=sua_chave_secreta
-JWT_EXPIRATION=3600s
-▶️ Scripts disponíveis
-Compilar o projeto
+---
 
-bash
-Copiar código
-npm run build
-Formatar o código
+### Endpoints Principais
 
-bash
-Copiar código
-npm run format
-Rodar em desenvolvimento (com reload automático)
+- **Registro de Usuário:** `POST /api/auth/register`
+- **Login:** `POST /api/auth/login`
+- **Perfil do Usuário Logado:** `GET /api/auth/profile`
+- **Alterar Senha:** `PUT /api/auth/change-password`
+- **Logout:** `POST /api/auth/logout`
+- **Listagem de Usuários:** `GET /api/users`
+- **Obter Usuário por ID:** `GET /api/users/:id`
+- **Criar Usuário (Admin):** `POST /api/users`
+- **Atualizar Usuário:** `PUT /api/users/:id`
+- **Deletar Usuário (soft delete - Admin):** `DELETE /api/users/:id`
 
-bash
-Copiar código
-npm run start:dev
-Rodar em modo debug
+Para mais detalhes, consulte a documentação disponível no endpoint:  
+`GET /api/docs`
 
-bash
-Copiar código
-npm run start:debug
-Rodar em produção
+---
 
-bash
-Copiar código
-npm run start:prod
-Rodar linter
+## Segurança
 
-bash
-Copiar código
-npm run lint
-Testes unitários
+- Senhas armazenadas com hash seguro via bcrypt
+- Tokens JWT válidos por 24 horas
+- Rate limiting para limitar requisições por IP
+- Validação consistente dos dados de entrada
+- Controle de acesso por roles para proteger dados e funcionalidades sensíveis
 
-bash
-Copiar código
-npm test
-Testes com watch
+---
 
-bash
-Copiar código
-npm run test:watch
-Cobertura de testes
+## Estrutura do Projeto
 
-bash
-Copiar código
-npm run test:cov
-Testes end-to-end (e2e)
-
-bash
-Copiar código
-npm run test:e2e
-📌 Endpoints
-Autenticação
-POST /auth/login – Login
-
-POST /auth/register – Registro
-
-Usuários
-GET /users – Listar usuários
-
-GET /users/:id – Buscar usuário
-
-POST /users – Criar usuário
-
-PUT /users/:id – Atualizar usuário
-
-
-DELETE /users/:id – Remover usuário
+├── src/
+│ ├── config/ # Configurações do DB e JWT
+│ ├── controllers/ # Lógica da aplicação
+│ ├── middleware/ # Middlewares (autenticação, validação, erros)
+│ ├── models/ # Interação com banco de dados
+│ ├── routes/ # Definição das rotas
+│ └── utils/ # Funções auxiliares
+├── .env # Variáveis de ambiente (não versionado)
+├── server.js # Arquivo principal do servidor
+└── package.json # Dependências e scripts
