@@ -30,10 +30,6 @@ Configure o arquivo .env:
 env
 Copiar código
 DB_HOST=localhost
-DB_PORT=3306
-DB_USER=seu_usuario
-DB_PASS=sua_senha
-DB_NAME=desafio_api
 
 JWT_SECRET=sua_chave_secreta
 JWT_EXPIRATION=3600s
@@ -102,5 +98,6 @@ GET /users/:id – Buscar usuário
 POST /users – Criar usuário
 
 PUT /users/:id – Atualizar usuário
+
 
 DELETE /users/:id – Remover usuário
